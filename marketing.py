@@ -1,8 +1,8 @@
 import requests
 
-url = "http://localhost:9696:/predict"
+url = "http://localhost:9696/predict"
 
-patient = '{
+patient = {
   "sex": "female",
   "cp": "atypical_angina",
   "fbs": "false",
@@ -15,15 +15,15 @@ patient = '{
   "chol": 302.0,
   "thalch": 162.0,
   "oldpeak": 0.4,
-  "ca": 2.0
+  "ca": 2.0,
 }
 
 response = requests.post(url, json = patient)
-health = response.json
+health = response.json()
 
 print('prob of healthy person =', health)
 
-if health >= 0.4:
+if health['health_probability'] >= 0.4:
     print('Patient is at heart risk')
 else:
     print('Patients heart is healthy')
